@@ -20,90 +20,42 @@ const myMSALObj = new Msal.UserAgentApplication(
 const AuthContext = React.createContext();
 
 class AuthProvider extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      authenticated: false,
-      wait: true,
-      user: {},
-      error: ""
-    };
+  state = {
+    authenticated: false,
+    wait: true,
+    user: {}
+  };
 
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    // this.checkAuthentication = this.checkAuthentication.bind(this);
-  }
-
-  componentDidMount() {
-    // simpler - just check if we have a user!
+  componentDidMount = () => {
+    // check if we have a user already
     const user = myMSALObj.getUser();
     if (user) {
       this.setState({ authenticated: true, user: user });
     }
-
     this.setState({ wait: false });
+  };
 
-    // this.checkAuthentication();
-  }
+  // using MSAL loginPopup method
+  login = () => {
+    myMSALObj.loginPopup(applicationConfig.graphScopes).then(idToken => {
+      const user = myMSALObj.getUser();
+      this.setState({ authenticated: true, user: user, wait: false });
+    });
+  };
 
-  // checkAuthentication() {
-  //   const token = sessionStorage.getItem("msal.idtoken");
-  //
-  //   // In some cases you may just want to see if your token expired.
-  //   // isAuthenticated() {
-  //   //   // Check whether the current time is past the token's expiry
-  //   //   let now = new Date().getTime()
-  //   //   let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-  //   //   return now < expiresAt;
-  //   // }
-  //
-  //   if (token) {
-  //     const user = myMSALObj.getUser();
-  //     if (user) {
-  //       this.setState({ authenticated: true, user: user });
-  //     }
-  //   }
-  //
-  //   this.setState({ wait: false });
-  // }
-
-  // use MSAL loginPopup method
-  login() {
-    myMSALObj
-      .loginPopup(applicationConfig.graphScopes)
-      .then(
-        idToken => {
-          //Login Success
-          this.setState({ authenticated: true });
-
-          // get user information
-          const user = myMSALObj.getUser();
-          this.setState({ user: user, wait: false });
-        },
-        error => {
-          console.log("here: " + error); // Error!
-        }
-      )
-      .catch(error => {
-        console.error("onRejected function called: " + error.message);
-      });
-  }
-
-  // use MSAL logout method
-  logout() {
-    this.setState({ authenticated: false });
+  logout = () => {
     sessionStorage.clear();
-    // myMSALObj.logout();  // this fully logs you our from MSFT
-  }
+    this.setState({ authenticated: false, user: {}, wait: false });
+    // myMSALObj.logout(); // this fully logs you out from MSFT
+  };
 
-  render() {
+  render = () => {
     return (
       <AuthContext.Provider
         value={{
           authenticated: this.state.authenticated,
           wait: this.state.wait,
           user: this.state.user,
-          error: this.state.error,
           login: this.login,
           logout: this.logout
         }}
@@ -111,7 +63,7 @@ class AuthProvider extends React.Component {
         {this.props.children}
       </AuthContext.Provider>
     );
-  }
+  };
 }
 
 const AuthConsumer = AuthContext.Consumer;
