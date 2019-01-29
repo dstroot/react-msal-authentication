@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar it should render 1`] = `
+<nav
+  className="navbar fixed-top navbar-expand-sm navbar-light bg-light"
+>
+  <div
+    className="container"
+  >
+    <a
+      aria-current="page"
+      className="navbar-brand"
+      href="/"
+      onClick={[Function]}
+    >
+      <img
+        alt="Pacific Life"
+        className="d-inline-block align-middle"
+        height="40"
+        src="logo-horiz.svg"
+        width="220"
+      />
+    </a>
+    <button
+      aria-label="Toggle navigation"
+      className="navbar-toggler collapsed"
+      onClick={[Function]}
+      type="button"
+    >
+      <span
+        className="navbar-toggler-icon"
+      />
+    </button>
+    <div
+      className="navbar-collapse collapse"
+    >
+      <a
+        aria-current="page"
+        className="active nav-link"
+        href="/"
+        onClick={[Function]}
+      >
+        Home
+      </a>
+      <a
+        className="nav-link"
+        href="/about"
+        onClick={[Function]}
+      >
+        About
+      </a>
+      <a
+        className="nav-link"
+        href="/news"
+        onClick={[Function]}
+      >
+        News
+      </a>
+    </div>
+  </div>
+</nav>
+`;

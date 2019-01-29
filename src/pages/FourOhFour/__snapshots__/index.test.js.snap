@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FourOhFour it should render 1`] = `
+<div
+  className="cover"
+  style={
+    Object {
+      "backgroundImage": "url(giphy.webp)",
+    }
+  }
+>
+  <div
+    className="d-flex justify-content-center color-wash"
+  >
+    <h1
+      className="mt-5 p-5 display-3 text-white"
+    >
+      Oops... 404
+    </h1>
+  </div>
+</div>
+`;

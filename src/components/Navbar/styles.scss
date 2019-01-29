@@ -1,0 +1,22 @@
+//
+// Main navbar
+//
+
+.navbar {
+  box-shadow: 0 2px 40px 0 rgba(0, 0, 0, 0.1);
+  text-transform: uppercase;
+  a {
+    text-transform: uppercase;
+    font-weight: 500;
+    color: gray("500");
+    // border-bottom: 3px solid rgba(0, 0, 0, 0);
+    // padding-bottom: 3px;
+    &:hover {
+      color: theme-color("primary");
+    }
+  }
+  a.active {
+    color: theme-color("primary");
+    // border-bottom: 3px solid theme-color("primary");
+  }
+}

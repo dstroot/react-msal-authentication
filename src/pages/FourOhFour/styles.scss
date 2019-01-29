@@ -1,0 +1,20 @@
+.cover {
+  width: 100%;
+  // padding: 60px 30px;
+
+  /* Set a specific min height */
+  min-height: 80vh;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+  .color-wash {
+    /* Set a specific min height */
+    min-height: 80vh;
+    /* color overlay */
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
