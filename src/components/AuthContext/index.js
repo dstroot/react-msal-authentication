@@ -1,22 +1,14 @@
 import React from "react";
 import * as Msal from "msal";
-
-// MSAL Configuration
-const applicationConfig = {
-  clientID: process.env.REACT_APP_MSFT_CLIENTID,
-  authority: process.env.REACT_APP_MSFT_AUTHORITY,
-  graphScopes: ["user.read"],
-  graphEndpoint: "https://graph.microsoft.com/v1.0/me"
-};
+import { navigate } from "@reach/router";
 
 // Instantiate MSAL object
 const myMSALObj = new Msal.UserAgentApplication(
-  applicationConfig.clientID,
-  applicationConfig.authority,
+  process.env.REACT_APP_MSFT_CLIENTID,
+  process.env.REACT_APP_MSFT_AUTHORITY,
   { storeAuthStateInCookie: true, cacheLocation: "localStorage" }
 );
 
-// Create AuthContext
 const AuthContext = React.createContext();
 
 class AuthProvider extends React.Component {
@@ -27,7 +19,8 @@ class AuthProvider extends React.Component {
   };
 
   componentDidMount = () => {
-    // check if we have a user already
+    // Check if we have a user, if so we are authenticated.
+    // Used for page reloads to determine status.
     const user = myMSALObj.getUser();
     if (user) {
       this.setState({ authenticated: true, user: user });
@@ -35,18 +28,19 @@ class AuthProvider extends React.Component {
     this.setState({ wait: false });
   };
 
-  // using MSAL loginPopup method
+  // Using MSAL loginPopup method
   login = () => {
-    myMSALObj.loginPopup(applicationConfig.graphScopes).then(idToken => {
+    myMSALObj.loginPopup(["user.read"]).then(idToken => {
       const user = myMSALObj.getUser();
       this.setState({ authenticated: true, user: user, wait: false });
+      navigate("/dashboard"); // if you want to direct the user to a page after login
     });
   };
 
   logout = () => {
     sessionStorage.clear();
     this.setState({ authenticated: false, user: {}, wait: false });
-    // myMSALObj.logout(); // this fully logs you out from MSFT
+    // myMSALObj.logout(); // this *fully* logs you out from MSFT
   };
 
   render = () => {

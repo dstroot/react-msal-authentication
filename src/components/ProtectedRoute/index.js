@@ -2,9 +2,10 @@ import React from "react";
 import { Redirect } from "@reach/router";
 import { AuthConsumer } from "../AuthContext";
 
-// NOTE: "wait" allows for AuthContext to determine if we are already
-// logged in on page refreshes. Otherwise we will be immediately
-// redirected to the home page.
+// NOTE: "wait" allows for AuthContext to determine our status
+// on page reloads before we do anything. It won't render or
+// redirect until we know if the user is authenticated. Otherwise
+// we will be immediately redirected to the home page every time.
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => (
   <AuthConsumer>

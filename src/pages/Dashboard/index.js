@@ -4,25 +4,25 @@ import { AuthConsumer } from "../../components/AuthContext";
 const Dashboard = () => (
   <AuthConsumer>
     {({ user }) => {
+      let minutes = 1000 * 60;
       let now = new Date().getTime();
-      let expires = new Date(user.idToken.exp * 1000).getTime();
-      let timeDiff = Math.abs((now - expires) / 1000);
-      let hours = Math.ceil(timeDiff / 3600);
+      let expires = user.idToken.exp * 1000;
+      let timeDiff = expires - now;
+      let time = Math.floor(timeDiff / minutes);
       return (
         <div className="container mt-5">
           <div className="row">
             <div className="col">
               <h2>User Dashboard</h2>
-              <h3>User: {user.name}</h3>
-              <h3>Email: {user.displayableId}</h3>
-              <h3>Expires: {user.idToken.exp * 1000}</h3>
-              <h3>Expires: {now}</h3>
               <h3>
-                Authenticated: {(now < user.idToken.exp * 1000).toString()}
+                User: {user.name} ({user.displayableId})
               </h3>
-              <h3>Time until auth expires: {hours}</h3>
-              <h4>User Object</h4>
-              <pre>{JSON.stringify(user)}</pre>
+              <h5>
+                Authenticated: {(now < expires).toString()} (expires: {time}{" "}
+                minutes)
+              </h5>
+              <h5>User Object</h5>
+              <pre>{JSON.stringify(user, null, 4)}</pre>
             </div>
           </div>
         </div>
