@@ -1,15 +1,14 @@
 import React from "react";
 import { AuthConsumer } from "../../components/AuthContext";
 
-const Dashboard = () => {
-  let now = new Date().getTime();
-  // let expires = new Date(user.idToken.exp * 1000).getTime();
-  // let timeDiff = Math.abs(now - expires);
-  // let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-  return (
-    <AuthConsumer>
-      {({ user }) => (
+const Dashboard = () => (
+  <AuthConsumer>
+    {({ user }) => {
+      let now = new Date().getTime();
+      let expires = new Date(user.idToken.exp * 1000).getTime();
+      let timeDiff = Math.abs((now - expires) / 1000);
+      let hours = Math.ceil(timeDiff / 3600);
+      return (
         <div className="container mt-5">
           <div className="row">
             <div className="col">
@@ -21,14 +20,15 @@ const Dashboard = () => {
               <h3>
                 Authenticated: {(now < user.idToken.exp * 1000).toString()}
               </h3>
+              <h3>Time until auth expires: {hours}</h3>
               <h4>User Object</h4>
               <pre>{JSON.stringify(user)}</pre>
             </div>
           </div>
         </div>
-      )}
-    </AuthConsumer>
-  );
-};
+      );
+    }}
+  </AuthConsumer>
+);
 
 export default Dashboard;

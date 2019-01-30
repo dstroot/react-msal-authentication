@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
 import { AuthConsumer } from "../AuthContext";
 import { Link } from "@reach/router";
-
 import logo from "./media/hatchlogo.png";
 
 // isCurrent - true if the location.pathname is exactly the same as the anchor’s href.
