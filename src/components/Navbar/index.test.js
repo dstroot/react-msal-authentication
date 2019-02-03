@@ -1,17 +1,24 @@
 import React from "react";
 import renderer from "react-test-renderer";
+
 import NavBar from "../NavBar";
+import context from "../AuthContext/__mocks__/context";
+
+// Mock our AuthConsumer
+const mockContext = jest.fn();
+jest.mock("../../components/AuthContext", () => ({
+  AuthConsumer: ({ children }) => children(mockContext())
+}));
 
 describe("NavBar", () => {
+  beforeEach(() => {
+    mockContext.mockReset();
+  });
+
   it("it should render", () => {
+    mockContext.mockReturnValue(context);
     const component = renderer.create(<NavBar />);
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
-
-// https://medium.com/@ryandrewjohnson/unit-testing-components-using-reacts-new-context-api-4a5219f4b3fe
-
-// https://medium.com/@wyattsweet/testing-react-components-using-the-new-context-api-a1c553edc2fa
-
-// https://github.com/airbnb/enzyme/issues/1636

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard should render 1`] = `
+<div
+  className="container mt-5"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col"
+    >
+      <h2>
+        User Dashboard
+      </h2>
+      <h3>
+        User: 
+        User Name
+         (
+        dan@msft.com
+        )
+      </h3>
+      <h5>
+        User Object
+      </h5>
+      <pre>
+        {
+    "displayableId": "dan@msft.com",
+    "name": "User Name",
+    "identityProvider": "https://login.microsoftonline.com/v2.0",
+    "userIdentifier": "identfierstring",
+    "idToken": {
+        "aud": "uniquestring",
+        "iss": "https://login.microsoftonline.com/v2.0",
+        "iat": 1549125156,
+        "nbf": 1549125156,
+        "exp": 1549129056,
+        "aio": "anotheruniquestring",
+        "name": "User Name",
+        "nonce": "string",
+        "oid": "string",
+        "preferred_username": "dan@msft.com",
+        "sub": "string",
+        "tid": "string",
+        "uti": "striung",
+        "ver": "2.0"
+    }
+}
+      </pre>
+    </div>
+  </div>
+</div>
+`;

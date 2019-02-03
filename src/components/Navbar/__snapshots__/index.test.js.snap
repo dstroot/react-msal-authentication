@@ -16,9 +16,8 @@ exports[`NavBar it should render 1`] = `
       <img
         alt="Pacific Life"
         className="d-inline-block align-middle"
-        height="40"
-        src="logo-horiz.svg"
-        width="220"
+        height="35"
+        src="hatchlogo.png"
       />
     </a>
     <button
@@ -44,18 +43,17 @@ exports[`NavBar it should render 1`] = `
       </a>
       <a
         className="nav-link"
-        href="/about"
+        href="/dashboard"
         onClick={[Function]}
       >
-        About
+        Dashboard
       </a>
-      <a
-        className="nav-link"
-        href="/news"
-        onClick={[Function]}
+      <button
+        className="btn btn-outline-primary my-2 my-sm-0"
+        onClick={[MockFunction]}
       >
-        News
-      </a>
+        logout
+      </button>
     </div>
   </div>
 </nav>
