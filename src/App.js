@@ -1,11 +1,14 @@
 import React from "react";
 import { Router } from "@reach/router";
 
-// context
-import { AuthProvider } from "./components/AuthContext";
+// Authorization
+import {
+  AuthProvider,
+  ProtectedRoute,
+  PublicRoute
+} from "./components/Authorization";
 
 // components
-import { ProtectedRoute, PublicRoute } from "./components/ProtectedRoute";
 import Navbar from "./components/Navbar";
 import "./scss/main.scss";
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { AuthConsumer } from "../AuthContext";
+import { AuthConsumer } from "../Authorization";
 import { Link } from "@reach/router";
 import logo from "./media/hatchlogo.png";
 import "./styles.scss";
@@ -75,7 +75,9 @@ const Navbar = () => {
                 Home
               </ExactNavLink>
 
-              {/* show protected links or show login button if not logged in */}
+              {/* 
+                show protected links or show login button if not logged in 
+              */}
               {authenticated ? (
                 <>
                   <ExactNavLink to="/dashboard" onClick={toggleHidden}>

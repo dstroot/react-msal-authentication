@@ -2,11 +2,11 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import NavBar from "../NavBar";
-import context from "../AuthContext/__mocks__/context";
+import context from "../Authorization/__mocks__/context";
 
 // Mock our AuthConsumer
 const mockContext = jest.fn();
-jest.mock("../../components/AuthContext", () => ({
+jest.mock("../../components/Authorization", () => ({
   AuthConsumer: ({ children }) => children(mockContext())
 }));
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { AuthConsumer } from "../../components/AuthContext";
+import { AuthConsumer } from "../../components/Authorization";
 // import "./styles.scss";
 
 const Dashboard = () => (

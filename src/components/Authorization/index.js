@@ -1,6 +1,6 @@
 import React from "react";
 import * as Msal from "msal";
-import { navigate } from "@reach/router";
+import { navigate, Redirect } from "@reach/router";
 
 // Instantiate MSAL object
 const myMSALObj = new Msal.UserAgentApplication(
@@ -62,4 +62,25 @@ class AuthProvider extends React.Component {
 
 const AuthConsumer = AuthContext.Consumer;
 
-export { AuthProvider, AuthConsumer };
+// NOTE: "wait" allows for AuthContext to determine our status
+// on page reloads before we do anything. It won't render or
+// redirect until we know if the user is authenticated. Otherwise
+// we will be immediately redirected to the home page every time.
+
+const ProtectedRoute = ({ component: Component, ...rest }) => (
+  <AuthConsumer>
+    {({ authenticated, wait }) =>
+      wait ? null : authenticated ? (
+        <Component {...rest} />
+      ) : (
+        <Redirect from="" to="/" noThrow />
+      )
+    }
+  </AuthConsumer>
+);
+
+const PublicRoute = ({ component: Component, ...rest }) => (
+  <Component {...rest} />
+);
+
+export { AuthProvider, AuthConsumer, ProtectedRoute, PublicRoute };
